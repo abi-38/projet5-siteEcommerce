@@ -1,0 +1,14 @@
+#boiteANounours, #boiteACameras, #boiteAMeubles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.nounours, .cameras, .meubles {
+    width: 25vw;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
