@@ -15,9 +15,8 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
     let imgNounours = document.createElement('img');
     divNounours.appendChild(imgNounours);
     imgNounours.src = data.imageUrl;
-    imgNounours.style.width = '100px'
 
-    let titreNounours = document.createElement('p');
+    let titreNounours = document.createElement('h3');
     divNounours.appendChild(titreNounours);
     titreNounours.innerHTML = data.name;
 
@@ -27,7 +26,7 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
 
     let priceNounours = document.createElement('p');
     divNounours.appendChild(priceNounours);
-    priceNounours.innerHTML = data.price;
+    priceNounours.innerHTML = data.price + ' €';
 
     let labelNounours = document.createElement('label');
     divNounours.appendChild(labelNounours);
@@ -44,41 +43,25 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
         optionNounours.value = (data.colors[j]);
     }
 
-    let buttonNounours = document.createElement('button');
+    let buttonNounours = document.createElement('a');
     divNounours.appendChild(buttonNounours);
-    buttonNounours.innerHTML = 'ajouter au panier';
+    buttonNounours.innerHTML = 'Ajouter au panier';
+    buttonNounours.classList.add('button');
 
 
     buttonNounours.addEventListener('click', function(e) {
-        /* je regarde si le panier existe déjà */
-            /* sinon le créé + ajout nounours + le mettre en storage -> json.stringify */
-        
-            /* s'il existe alors je le traduit en tableau -> json.parse + j'ajoute au tableau le nounours et le remettre en storage -> json.stringify */
-
-        
+        /* je regarde si le panier existe déjà */        
+        /* s'il existe alors je le traduit en tableau -> json.parse + j'ajoute au tableau le nounours et le remettre en storage -> json.stringify */
         let monPanier = localStorage.getItem('monPanier');
         if(monPanier == null){
             let monArticle = [];
-            monArticle.push([nounours, data.price, data.name, selectNounours.options[selectNounours.selectedIndex].value]);
+            monArticle.push([nounours, data.price, data.name, selectNounours.options[selectNounours.selectedIndex].value, data.imageUrl]);
             localStorage.setItem('monPanier', JSON.stringify(monArticle));
-           
+        /* sinon je crée + ajout nounours + le mettre en storage -> json.stringify */
         } else {
             let monAjout = JSON.parse(monPanier);
-            monAjout.push([nounours, data.price, data.name, selectNounours.options[selectNounours.selectedIndex].value]);
+            monAjout.push([nounours, data.price, data.name, selectNounours.options[selectNounours.selectedIndex].value, data.imageUrl]);
             localStorage.setItem('monPanier', JSON.stringify(monAjout));
         }
-        
-
-
-
-        /*
-        let monPanierElt = document.getElementById('monPanier');
-        monPanierElt.innerHTML = '';
-        monPanierElt.innerHTML += 'monString = ' + localStorage.getItem('monString') + '<br>';
-        monPanierElt.innerHTML += 'monBool = ' + localStorage.getItem('monBool') + '<br>';
-        monPanierElt.innerHTML += 'monArray = ' + localStorage.getItem('monArray') + '<br>';
-        monPanierElt.innerHTML += 'monObjet = ' + localStorage.getItem('monObjet') + '<br>';
-        */
     })
-
 })

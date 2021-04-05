@@ -11,19 +11,24 @@ fetch("http://localhost:3000/api/teddies")
         let imgNounours = document.createElement('img');
         divNounours.appendChild(imgNounours);
         imgNounours.src = data[i].imageUrl;
-        imgNounours.style.width = '100px'
+        imgNounours.classList.add('imgNounours');
 
-        let titreNounours = document.createElement('p');
-        divNounours.appendChild(titreNounours);
+        let divTitrePrix = document.createElement('div');
+        divNounours.appendChild(divTitrePrix);
+        divTitrePrix.classList.add('titrePrix');
+
+        let titreNounours = document.createElement('h3');
+        divTitrePrix.appendChild(titreNounours);
         titreNounours.innerHTML = data[i].name;
 
         let priceNounours = document.createElement('p');
-        divNounours.appendChild(priceNounours);
-        priceNounours.innerHTML = data[i].price;
+        divTitrePrix.appendChild(priceNounours);
+        priceNounours.innerHTML = data[i].price + ' €';
 
         let aNounours = document.createElement('a');
         divNounours.appendChild(aNounours);
         aNounours.innerHTML = "Voir plus";
+        aNounours.classList.add('voirPlus');
         aNounours.setAttribute('href', 'ficheProduitNounours.html?nounours=' + data[i]._id);
 
     }

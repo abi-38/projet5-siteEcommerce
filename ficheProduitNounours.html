@@ -4,15 +4,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ficheProduit.css">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    
     <title>Fiche produit Nounours</title>
-    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <h1>Fiche produit</h1>
-    <h2>Description du nounours</h2>
-    <div id="desciptionNounours"></div>
-
-    <div id="monPanier"></div>
+    <header>
+        <nav>
+            <a href="index.html"><img class="imgHeader logo" src="images/logo.png" alt="logo"></a>
+            <ul>
+                <li><a href="index.html"><img class="imgHeader" src="images/home-page.png" alt="icone home-page"><p>Accueil</p></a></li>
+                <li><a href="monPanier.html"><img class="imgHeader" src="images/icone-panier.png" alt="icone Panier"><p>Panier</p></a></li>
+                <li><a href="commandes.html"><img class="imgHeader" src="images/icone-compte.png" alt="icone Commpte"><p>Compte</p></a></li>
+        </nav>
+    </header>
+    <main>
+        <div class="ligne">
+            <a href="index.html"><img src="images/return-arrow.png" alt="flèche de retour"></a>
+            <div>
+                <h1>Fiche produit</h1>
+                <h2>Description de votre nounours</h2>
+            </div>
+        </div>
+        <div id="desciptionNounours"></div>
+    
+        <div id="monPanier"></div>
+    </main>
+    <footer>
+        <nav>
+            <a href="index.html"><img class="imgHeader logo" src="images/logo.png" alt="logo"></a>
+            <ul>
+                <li><a href="index.html"><p>Accueil</p></a></li>
+                <li><a href="monPanier.html"><p>Panier</p></a></li>
+                <li><a href="commandes.html"><p>Compte</p></a></li>
+                <li><a href="#"><p>Condtions générales</p></a></li>
+                <li><a href="#"><p>Mentions légales</p></a></li>
+                <li><a href="#"><p>Politique de confidentialité</p></a></li>
+            </ul>
+        </nav>
+    </footer>
 
     <script src="ficheProduitNounours.js"></script>
 </body>

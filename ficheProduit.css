@@ -1,12 +1,12 @@
 body {
-   padding: 0;
-   margin: 0;
+    padding: 0;
+    margin: 0;
 }
-
-h1, h2, h3, p, a {
+ 
+h1, h2, h3, p, a, label, select#color {
     font-family: 'Finger Paint', cursive;
 }
-
+ 
 .imgHeader {
     width: auto;
     height: 50px;
@@ -38,12 +38,12 @@ nav > ul > li > a {
     color: black;
 }
 
-nav > ul > li > a > p {
-    margin-top: 0px;
-}
-
 footer > nav > ul > li > a > p {
     padding-left: 20px;
+}
+
+nav > ul > li > a > p {
+    margin-top: 0px;
 }
 
 nav > ul > li > a:hover {
@@ -56,6 +56,24 @@ header {
 
 main {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #9F63D1;
+}
+
+.ligne {
+    display: flex;
+    background-color: white;
+    width: 100vw;
+    justify-content: center;
+}
+
+.ligne > a > img {
+    height: 50px;
+    position: absolute;
+    left: 12px;
+    top: 150px;
 }
 
 #boiteANounours {
@@ -74,7 +92,7 @@ main {
     border: 1px solid #f0e5dc;
     border-radius: 10px;
     padding: 10px;
-    margin: 10px;
+    margin: 30px 10px 30px 10px;
     background-color: #f0e5dc;
     overflow: hidden;
 }
@@ -90,16 +108,36 @@ main {
     justify-content: space-around;
 }
 
-.voirPlus {
+.button {
     padding: 10px;
     color: white;
     background-color: black;
     border-radius: 10px;
     text-decoration: none;
+    margin: 40px 0 20px 0;
     cursor: pointer;
 }
 
-.voirPlus:hover {
+.button:hover {
     background-color: #9F63D1;
 }
 
+label {
+    margin-bottom: 9px;
+}
+
+select#color {
+    padding: 10px;
+    border-radius: 10px;
+    padding-top: 15px;
+}
+
+div.nounours > img {
+    height: 250px;
+    width: auto;
+    margin-top: -15px;
+}
+
+.message {
+    color: white;
+}

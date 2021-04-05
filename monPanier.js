@@ -1,11 +1,30 @@
 let divElt = document.getElementById('monPanier');
-
 let monPanier = localStorage.getItem('monPanier');
-if(monPanier == null){
+
+let maCommande = localStorage.getItem('maCommande');
+
+if(monPanier == null && maCommande == null){
   let pElt = document.createElement('p');
   divElt.appendChild(pElt);
   pElt.innerHTML = 'Votre panier est vide';
     
+} else if(maCommande) {
+  let maCommandeElt = JSON.parse(maCommande);
+
+  let pElt = document.createElement('p');
+  divElt.appendChild(pElt);
+  pElt.innerHTML = 'Votre commande n°' + maCommandeElt.orderId + ' a bien été passé !';
+  pElt.classList.add('message');
+
+  let buttonCommandeElt = document.createElement('a');
+  divElt.appendChild(buttonCommandeElt);
+  buttonCommandeElt.innerHTML = 'Accéder à mon compte';
+  buttonCommandeElt.classList.add('accesCommande');
+
+  buttonCommandeElt.addEventListener('click', function(e){
+    buttonCommandeElt.setAttribute('href', 'commandes.html');
+  })
+
 } else {
   let monPanierObject = JSON.parse(monPanier);
   console.log(monPanierObject);
@@ -16,16 +35,22 @@ if(monPanier == null){
     let divArticleElt = document.createElement('div');
     divElt.appendChild(divArticleElt);
     divArticleElt.classList.add("divArticle");
+
+    /* Affichage du nom de l'article */
+    let imgElt = document.createElement('img');
+    divArticleElt.appendChild(imgElt);
+    imgElt.src = monPanierObject[i][4];
+    imgElt.classList.add('imgNounours');
     
     /* Affichage du nom de l'article */
-    let h2Elt = document.createElement('h2');
+    let h2Elt = document.createElement('h3');
     divArticleElt.appendChild(h2Elt);
     h2Elt.innerHTML = monPanierObject[i][2];
 
     /* Affichage du prix de l'article */
     let prixElt = document.createElement('p');
     divArticleElt.appendChild(prixElt);
-    prixElt.innerHTML = monPanierObject[i][1];
+    prixElt.innerHTML = monPanierObject[i][1] + ' €';
 
     /* Affichage de la couleur de l'article */
     let p2Elt = document.createElement('p');
@@ -33,31 +58,39 @@ if(monPanier == null){
     p2Elt.innerHTML = monPanierObject[i][3];
 
     /* Affichage le bouton supprimer */
-    let buttonElt = document.createElement('button');
+    let buttonElt = document.createElement('a');
     divArticleElt.appendChild(buttonElt);
-    buttonElt.innerHTML = "supprimer l'article";
+    buttonElt.innerHTML = "Supprimer l'article";
     buttonElt.classList.add("buttonSuppr");
 
+    /* Ajout de l'event sur le bouton supprimer */
     buttonElt.addEventListener('click', function(e) {
       e.stopPropagation;
       e.preventDefault();
       console.log(JSON.stringify(monPanierObject[i]));
       localStorage.removeItem('monPanier.0');
 
-
+      /* Calcul du nombre d'élément dans le panier et le local storage */
       const index = monPanierObject.indexOf(monPanierObject[i]);
       console.log(index);
       
+      /* Suppression de l'item selectionné dans le tableau */
       if (index > -1) {
         monPanierObject.splice(index, 1);
       }
+      /* On réactualise la page pour que l'article se retire de l'affichage html */
       document.location.reload();
       console.log(monPanierObject); 
+
+      /* On vide le localstorage */
       localStorage.clear();
+
+      /* S'il n'y a plus d'article on réaffiche le message "panier vide" */
       if (monPanierObject.length === 0) {
         let pElt = document.createElement('p');
         divElt.appendChild(pElt);
         pElt.innerHTML = 'Votre panier est vide';
+      /* sinon on réinjecte les items encore présent dans le localstorage */
     } else{
         localStorage.setItem('monPanier', JSON.stringify(monPanierObject));
       }
@@ -68,111 +101,373 @@ if(monPanier == null){
 
   
   
-
+  /* Calcul du prix total en créant un tableau vide dans une variable */
   let monArray = [];
   console.log(monArray);
 
+  /* Chaque prix d'item est ajouté dans le tableau "monArray" */
   for (let j=0; j < monPanierObject.length; j++) {
     monArray.push(monPanierObject[j][1]);
     console.log(monArray);
   }
-
+  
+  /* Calcul la somme de tous les prix des items et les range dans la variable "sum" */
   const sum = monArray.reduce((accumulator, currentValue) => {  
     return accumulator + currentValue;
   });
   
-  console.log(sum); 
+  console.log(sum);
 
-  let resultElt = document.createElement('p');
-  divElt.appendChild(resultElt);
-  resultElt.innerHTML = 'Total :' + sum;
 
   /* FORM */
+  let divFormElt = document.createElement('div');
+  divElt.appendChild(divFormElt);
+  divFormElt.classList.add('divForm');
+
   let formElt = document.createElement('form');
-  divElt.appendChild(formElt);
+  divFormElt.appendChild(formElt);
   formElt.method = 'post';
 
-  /* firstname */
-  let labelFirstName = document.createElement('label');
-  formElt.appendChild(labelFirstName);
-  labelFirstName. setAttribute ("for", "firstName");
-  labelFirstName.innerHTML = 'firstName';
+  /* FIRSTNAME */
 
+  // Création du paragraphe qui contient le label et l'input
+  let pFirstName = document.createElement('p');
+  formElt.appendChild(pFirstName);
+  pFirstName.classList.add('pLabelInput');
+
+  // Création du label dans le paragraphe
+  let labelFirstName = document.createElement('label');
+  pFirstName.appendChild(labelFirstName);
+  labelFirstName. setAttribute ("for", "firstName");
+  labelFirstName.innerHTML = 'Nom';
+  labelFirstName.classList.add('label');
+
+  // Création de l'input dans le paragraphe
   let inputFirstName = document.createElement('input');
-  formElt.appendChild(inputFirstName);
+  pFirstName.appendChild(inputFirstName);
   inputFirstName.type = 'text';
   inputFirstName.id = 'firstName';
   inputFirstName.name = 'user_firstName';
   inputFirstName.placeholder = 'Dupont';
-  
-  /* lastname */
-  let labelLastName = document.createElement('label');
-  formElt.appendChild(labelLastName);
-  labelLastName. setAttribute ("for", "lastName");
-  labelLastName.innerHTML = 'lastName';
+  inputFirstName.setAttribute ("required", "required");
 
+  // Création du message d'erreur, il s'affichera dans un span en-dessous de l'input
+  let errorMessageFirstName = document.createElement('span');
+  pFirstName.appendChild(errorMessageFirstName);
+  errorMessageFirstName.classList.add('spanErrorMessage');
+
+  /* Fonction qui sera appelé au click du bouton "commander",
+  elle vérifie que la cellule est complétée */
+  function validateFirstName() { 
+    let inputLastName = document.getElementById('lastName');
+    const regex = /[0-9]/g;
+    if (inputLastName.value == "" || regex.test(inputLastName.value)) { 
+      
+      if (errorMessageFirstName.textContent == true) {
+        errorMessageFirstName.textContent=""; 
+        errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
+      } else {
+        errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
+      }
+
+      inputFirstName.focus(); 
+      return false; 
+    } else {
+      errorMessageFirstName.textContent=""; 
+      return true;
+    }
+  }
+  
+  /* LASTNAME */
+
+  // Création du paragraphe qui contient le label et l'input
+  let pLastName = document.createElement('p');
+  formElt.appendChild(pLastName);
+  pLastName.classList.add('pLabelInput');
+
+  // Création du label dans le paragraphe
+  let labelLastName = document.createElement('label');
+  pLastName.appendChild(labelLastName);
+  labelLastName. setAttribute ("for", "lastName");
+  labelLastName.innerHTML = 'Prénom';
+  labelLastName.classList.add('label');
+
+  // Création de l'input dans le paragraphe
   let inputLastName = document.createElement('input');
-  formElt.appendChild(inputLastName);
+  pLastName.appendChild(inputLastName);
   inputLastName.type = 'text';
   inputLastName.id = 'lastName';
   inputLastName.name = "user_lastName";
   inputLastName.placeholder = 'Jacques';
+  inputLastName.classList.add('label');
+  inputLastName.setAttribute ("required", "required");
 
-  /* address */
+  // Création du message d'erreur, il s'affichera dans un span en-dessous de l'input
+  let errorMessageLastName = document.createElement('span');
+  pLastName.appendChild(errorMessageLastName);
+  errorMessageLastName.classList.add('spanErrorMessage');
+
+  /* Fonction qui sera appelé au click du bouton "commander",
+  elle vérifie que la cellule est complétée */
+  function validateLastName() { 
+    let inputLastName = document.getElementById('lastName');
+    const regex = /[0-9]/g;
+    if (inputLastName.value == "" || regex.test(inputLastName.value)) { 
+      
+      if (errorMessageLastName.textContent == true) {
+        errorMessageLastName.textContent=""; 
+        errorMessageLastName.textContent="Veuillez entrez un prénom valide"; 
+      } else {
+        errorMessageLastName.textContent="Veuillez entrez un prénom valide"; 
+      }
+
+      inputLastName.focus(); 
+      return false; 
+    } else {
+      errorMessageLastName.textContent=""; 
+      return true;
+    }
+  }
+
+  /* ADDRESS */
+
+  // Création du paragraphe qui contient le label et l'input
+  let pAddress = document.createElement('p');
+  formElt.appendChild(pAddress);
+  pAddress.classList.add('pLabelInput');
+
+  // Création du label dans le paragraphe
   let labelAddress = document.createElement('label');
-  formElt.appendChild(labelAddress);
+  pAddress.appendChild(labelAddress);
   labelAddress. setAttribute ("for", "address");
-  labelAddress.innerHTML = 'address';
+  labelAddress.innerHTML = 'Adresse postale';
 
+  // Création de l'input dans le paragraphe
   let inputAddress = document.createElement('input');
-  formElt.appendChild(inputAddress);
+  pAddress.appendChild(inputAddress);
   inputAddress.type = 'text';
   inputAddress.id = 'address';
   inputAddress.name = "user_address";
   inputAddress.placeholder = 'rue de la ficelle';
-    
-  /* city */
-  let labelCity = document.createElement('label');
-  formElt.appendChild(labelCity);
-  labelCity. setAttribute ("for", "city");
-  labelCity.innerHTML = 'city';
+  inputAddress.setAttribute ("required", "required");
 
+  // Création du message d'erreur, il s'affichera dans un span en-dessous de l'input
+  let errorMessageAddress = document.createElement('span');
+  pAddress.appendChild(errorMessageAddress);
+  errorMessageAddress.classList.add('spanErrorMessage');
+
+  /* Fonction qui sera appelé au click du bouton "commander",
+  elle vérifie que la cellule est complétée */
+  function validateAddress() { 
+    let inputAddress = document.getElementById('address');
+    const regex = /^([a-z]){1,2}$/;
+    if (inputAddress.value == "" || regex.test(inputAddress.value)) { 
+      
+      if (errorMessageAddress.textContent == true) {
+        errorMessageAddress.textContent=""; 
+        errorMessageAddress.textContent="Veuillez entrez une addresse valide"; 
+      } else {
+        errorMessageAddress.textContent="Veuillez entrez une addresse valide"; 
+      }
+
+      inputAddress.focus(); 
+      return false; 
+    } else {
+      errorMessageAddress.textContent=""; 
+      return true;
+    }
+  }
+  
+  /* VILLE */
+
+  // Création du paragraphe qui contient le label et l'input
+  let pVille = document.createElement('p');
+  formElt.appendChild(pVille);
+  pVille.classList.add('pLabelInput');
+
+  // Création du label dans le paragraphe
+  let labelCity = document.createElement('label');
+  pVille.appendChild(labelCity);
+  labelCity. setAttribute ("for", "city");
+  labelCity.innerHTML = 'Ville';
+  labelCity.classList.add('label');
+
+  // Création de l'input dans le paragraphe
   let inputCity = document.createElement('input');
-  formElt.appendChild(inputCity);
+  pVille.appendChild(inputCity);
   inputCity.type = 'text';
   inputCity.id = 'city';
   inputCity.name = "city";
   inputCity.placeholder = 'Paris';
+  inputCity.setAttribute ("required", "required");
 
-  /* email */
+  // Création du message d'erreur, il s'affichera dans un span en-dessous de l'input
+  let errorMessageCity = document.createElement('span');
+  pVille.appendChild(errorMessageCity);
+  errorMessageCity.classList.add('spanErrorMessage');
+
+  /* Fonction qui sera appelée au click du bouton "commander",
+  elle vérifie que la cellule est complétée */
+  function validateCity() { 
+    let inputCity = document.getElementById('city');
+    const regex = /[0-9]/g;
+    if (inputCity.value == "" || regex.test(inputCity.value)) { 
+      
+      if (errorMessageCity.textContent == true) {
+        errorMessageCity.textContent=""; 
+        errorMessageCity.textContent="Veuillez entrez un nom de ville valide"; 
+      } else {
+        errorMessageCity.textContent="Veuillez entrez un nom de ville valide"; 
+      }
+
+      inputCity.focus(); 
+      return false; 
+    } else {
+      errorMessageCity.textContent=""; 
+      return true;
+    }
+  }
+
+  /* EMAIL */
+
+  // Création du paragraphe qui contient le label et l'input
+  let pEmail = document.createElement('p');
+  formElt.appendChild(pEmail);
+  pEmail.classList.add('pLabelInput');
+
+  // Création du label dans le paragraphe
   let labelEmail = document.createElement('label');
-  formElt.appendChild(labelEmail);
+  pEmail.appendChild(labelEmail);
   labelEmail. setAttribute ("for", "email");
-  labelEmail.innerHTML = 'email';
+  labelEmail.innerHTML = 'Adresse email';
+  labelEmail.classList.add('label');
 
+  // Création de l'input dans le paragraphe
   let inputEmail = document.createElement('input');
-  formElt.appendChild(inputEmail);
+  pEmail.appendChild(inputEmail);
   inputEmail.type = 'email';
   inputEmail.id = 'email';
   inputEmail.name = "user_email";
   inputEmail.placeholder = 'dupont.jacques@gmail.com';
+  inputEmail.setAttribute ("required", "required");
 
-  let buttonCommande = document.createElement('button');
-  divElt.appendChild(buttonCommande);
+  // Création du message d'erreur, il s'affichera dans un span en-dessous de l'input
+  let errorMessageEmail = document.createElement('span');
+  pEmail.appendChild(errorMessageEmail);
+  errorMessageEmail.classList.add('spanErrorMessage');
+
+  /* Fonction qui sera appelée au click du bouton "commander",
+  elle vérifie que la cellule est complétée */
+  function validateEmail() { 
+    let inputEmail = document.getElementById('email');
+    //const regex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,3}$/;
+    const regex = /^([a-zA-Z0-9_-]+)|([a-zA-Z0-9_-]+\.[a-zA-Z0-9_-])+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,3}$/;
+    if (inputEmail.value == "" || regex.exec(inputEmail.value)==null) { 
+      
+      if (errorMessageEmail.textContent == true) {
+        errorMessageEmail.textContent=""; 
+        errorMessageEmail.textContent="Veuillez entrez une adresse mail valide"; 
+      } else {
+        errorMessageEmail.textContent="Veuillez entrez une adresse mail valide"; 
+      }
+
+      inputEmail.focus(); 
+      return false; 
+    } else {
+      errorMessageEmail.textContent=""; 
+      return true;
+    }
+  }
+
+  // Affichage de l'indication "Les champs indiqués par une * sont obligatoires"
+  let indicationElt = document.createElement('p');
+  formElt.appendChild(indicationElt);
+  indicationElt.textContent = 'Les champs indiqués par une * sont obligatoires';
+  indicationElt.classList.add('indication');
+
+  let buttonCommande = document.createElement('a');
+  divFormElt.appendChild(buttonCommande);
   buttonCommande.innerHTML = 'Passer commande';
+  buttonCommande.classList.add('commandeBtn');
 
-  /*
+  // Affichage du texte "total"
+  let totalElt = document.createElement('p');
+  divFormElt.appendChild(totalElt);
+  totalElt.innerHTML = 'Total :';
+
+  // Affichage du prix total des articles
+  let resultElt = document.createElement('h3');
+  divFormElt.appendChild(resultElt);
+  resultElt.innerHTML = sum;
+
+  // Ajout d'un evénement sur le bouton "commander"
   buttonCommande.addEventListener('click', function(e) {
-    let response = await fetch('/article/fetch/post/user', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(user)
-  });
-  
-  let result = await response.json();
-  alert(result.message);
 
-  })*/
+    // Récupération des variables qui vérifie que les champs sont bien complétés
+    let validFirstName = validateFirstName();
+    let validLastName = validateLastName();
+    let validAddress = validateAddress();
+    let validCity = validateCity();
+    let validEmail = validateEmail();
+
+    // Condition qui vérifie que ces variables sont correctes
+    if (validFirstName && validLastName && validAddress && validCity && validEmail) {
+
+      /* Mettre ces éléments en storage pour sauvegarde */
+      // Création de l'objet contact
+      let contact = {
+        firstName: inputFirstName.value,
+        lastName: inputLastName.value,
+        address: inputAddress.value,
+        city: inputCity.value,
+        email: inputEmail.value,
+      }
+      localStorage.setItem('contact', JSON.stringify(contact));
+
+      // Création du tableau avec les id des produits du panier
+      let products = [];
+      for (let k=0; k < monPanierObject.length; k++) {
+        products.push(monPanierObject[k][0]);
+        console.log(products);
+        localStorage.setItem('products', JSON.stringify(products));
+      }
+
+      // Lancement de la requête fetch - envoi de la commande au serveur
+      fetch("http://localhost:3000/api/teddies/order", {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({contact, products})
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        console.log(JSON.stringify(data));
+        localStorage.setItem('maCommande', JSON.stringify(data));
+
+        let mesArticles = [];
+        for (let k=0; k < monPanierObject.length; k++) {
+
+          mesArticles.push(monPanierObject[k][4]);
+          mesArticles.push(monPanierObject[k][2]);
+          mesArticles.push(monPanierObject[k][1]);
+          mesArticles.push(monPanierObject[k][3]);
+
+          console.log(mesArticles);
+          localStorage.setItem('mesArticles', JSON.stringify(mesArticles));
+        }
+        localStorage.removeItem('contact');
+        localStorage.removeItem('monPanier');
+        localStorage.removeItem('products');
+
+        document.location.reload();
+        
+      });
+    }
+  })
 }
+
+
+

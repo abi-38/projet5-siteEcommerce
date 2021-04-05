@@ -1,0 +1,244 @@
+body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+ 
+h1, h2, h3, p, a, label, select#color {
+    font-family: 'Finger Paint', cursive;
+}
+ 
+.imgHeader {
+    width: auto;
+    height: 50px;
+}
+
+.logo {
+    padding-left: 5px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav > ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav > ul > li {
+    padding-right: 10px;
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+    font-family: 'Finger Paint', cursive;
+    color: black;
+}
+
+footer > nav > ul > li > a > p {
+    padding-left: 20px;
+}
+
+nav > ul > li > a > p {
+    margin-top: 0px;
+}
+
+nav > ul > li > a:hover {
+    color: #9F63D1;;
+}
+
+header {
+    border-bottom: 2px solid black;
+}
+
+main {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #9F63D1;
+}
+
+.ligne {
+    display: flex;
+    background-color: white;
+    width: 100vw;
+    justify-content: center;
+}
+
+.ligne > a > img {
+    height: 50px;
+    position: absolute;
+    left: 12px;
+    top: 150px;
+}
+
+.divTitre {
+    background-color: white;
+    width: 100vw;
+}
+
+#monPanier, .divArticles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #9F63D1;
+}
+
+.divArticle, .divPrix, .divForm {
+    border: 1px solid #f0e5dc;
+    border-radius: 10px;
+    margin: 30px 10px 30px 10px;
+    background-color: #f0e5dc;
+    overflow: hidden;
+    width: 25vw;
+    padding-bottom: 25px;
+}
+
+.divPrix {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 30vw 0 30vw;
+}
+
+.imgNounours {
+    height: 250px;
+    margin-top: -26px;
+}
+
+.titrePrix {
+    display: flex;
+    width: 25vw;
+    justify-content: space-around;
+}
+
+.divArticle > p {
+    margin-bottom: 20px;
+}
+
+.buttonSuppr, .commandeBtn, .accesCommande {
+    padding: 10px;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.accesCommande {
+    margin-left: 30vw;
+    margin-right: 30vw;
+    margin-bottom: 100px;
+    margin-top: 10px;
+
+}
+
+.buttonSuppr:hover, .commandeBtn:hover {
+    background-color: #9F63D1;
+}
+
+div.nounours > img {
+    height: 250px;
+    width: auto;
+    margin-top: -15px;
+}
+
+.divForm {
+    border: 1px solid #f0e5dc;
+    border-radius: 10px;
+    margin: 30px 39px 30px 39px;
+    background-color: #f0e5dc;
+    overflow: hidden;
+    width: 34vw;
+    padding-bottom: 25px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f0e5dc;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 30px;
+}
+
+label {
+    margin-bottom: 9px;
+    width: 10vw;
+    margin-right: 2px;
+}
+
+input {
+    cursor: pointer;
+    width: 15vw;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 27px;
+    padding-left: 5px;
+    border: 1px solid black;
+}
+
+input:focus {
+    border: 2px solid #9F63D1;
+    background-color: #9F63D1;
+    color: white;
+}
+
+select#color {
+    padding: 10px;
+    border-radius: 10px;
+    padding-top: 15px;
+}
+
+.label:after {
+    content:" *";
+}
+
+.indication, .spanErrorMessage {
+    font-size: 13px;
+    font-style: italic;
+}
+
+.pLabelInput {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.newClass {
+    display: none;
+}
+
+.message {
+    color: white;
+}
+
+h3.h3 {
+    width: 100vw;
+    color: white;
+}
+
+.infoContat {
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.divContactOnly {
+    background-color: #f0e5dc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.divContact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
