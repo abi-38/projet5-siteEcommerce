@@ -157,17 +157,19 @@ if(monPanier == null && maCommande == null){
   /* Fonction qui sera appelé au click du bouton "commander",
   elle vérifie que la cellule est complétée */
   function validateFirstName() { 
-    let inputLastName = document.getElementById('lastName');
+    let inputFirstName = document.getElementById('firstName');
     const regex = /[0-9]/g;
-    if (inputLastName.value == "" || regex.test(inputLastName.value)) { 
+    if (inputFirstName.value == "" || regex.test(inputFirstName.value)) { 
       
       // Cette condition évite que le message d'erreur se répéte à chaque click sur le bouton
       if (errorMessageFirstName.textContent == true) {
         errorMessageFirstName.textContent=""; 
+        errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
+      } else {
+        errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
+        inputFirstName.focus(); 
+        return false; 
       }
-      errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
-      inputFirstName.focus(); 
-      return false; 
     } else {
       errorMessageFirstName.textContent=""; 
       return true;
@@ -209,12 +211,12 @@ if(monPanier == null && maCommande == null){
     let inputLastName = document.getElementById('lastName');
     const regex = /[0-9]/g;
     if (inputLastName.value == "" || regex.test(inputLastName.value)) { 
-      
+
       if (errorMessageLastName.textContent == true) {
         errorMessageLastName.textContent=""; 
-        errorMessageLastName.textContent="Veuillez entrez un prénom valide"; 
+        errorMessageLastName.textContent="Veuillez entrez un nom valide"; 
       } else {
-        errorMessageLastName.textContent="Veuillez entrez un prénom valide"; 
+        errorMessageLastName.textContent="Veuillez entrez un nom valide"; 
       }
 
       inputLastName.focus(); 
@@ -356,7 +358,6 @@ if(monPanier == null && maCommande == null){
   elle vérifie que la cellule est complétée */
   function validateEmail() { 
     let inputEmail = document.getElementById('email');
-    //const regex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,3}$/;
     const regex = /^([a-zA-Z0-9_-]+)|([a-zA-Z0-9_-]+\.[a-zA-Z0-9_-])+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,3}$/;
     if (inputEmail.value == "" || regex.exec(inputEmail.value)==null) { 
       

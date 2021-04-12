@@ -69,7 +69,12 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
         }
     })
 })
-.catch(error => /*alert("Erreur : " + error);*/ {
+.catch(error => alert("Le nounours n'existe plus, retournez à l'accueil")/* {
+    
+    A VOIR EN MENTORA !!!!
+    
+    console.log(error);
+
     const boiteANounous = document.getElementById("desciptionNounours");
 
     let pElt = document.createElement('p');
@@ -79,9 +84,17 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
     let buttonReturn = document.createElement('a');
     boiteANounous.appendChild(buttonReturn);
     buttonReturn.innerHTML = "Retourner à l'accueil";
+
+
     buttonReturn.setAttribute('href', 'index.html');
     buttonReturn.classList.add('button'); 
-    
-    let divClassNounours = document.querySelectorAll('.nounours');
-    divClassNounours.style.display = 'none';
-})
+
+    /*let divNounours = document.getElementsByClassName('nounours');
+    console.log(divNounours);
+    boiteANounous.removeChild(divNounours);
+    let divNounours = document.getElementsByClassName('nounours');
+    divNounours.classList.replace("nounours", "displayNone");
+
+
+}*/
+)
