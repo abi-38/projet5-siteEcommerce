@@ -1,3 +1,5 @@
+//const { response } = require("express");
+
 let params = (new URL(document.location)).searchParams;
 let nounours = params.get('nounours');
 console.log(nounours);
@@ -5,7 +7,7 @@ console.log(nounours);
 fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
 .then(response => response.json()) /*attente récéption donnée + traduction*/
 .then(data => { /*stockage des données dans la variable data*/
-    console.log(data)
+    
     const boiteANounous = document.getElementById("desciptionNounours");
 
     let divNounours = document.createElement('div');
@@ -48,7 +50,9 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
     buttonNounours.innerHTML = 'Ajouter au panier';
     buttonNounours.classList.add('button');
 
-
+    /////////////
+    //EVENEMENT//
+    ////////////
     buttonNounours.addEventListener('click', function(e) {
         /* je regarde si le panier existe déjà */        
         /* s'il existe alors je le traduit en tableau -> json.parse + j'ajoute au tableau le nounours et le remettre en storage -> json.stringify */
@@ -64,4 +68,20 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
             localStorage.setItem('monPanier', JSON.stringify(monAjout));
         }
     })
+})
+.catch(error => /*alert("Erreur : " + error);*/ {
+    const boiteANounous = document.getElementById("desciptionNounours");
+
+    let pElt = document.createElement('p');
+    boiteANounous.appendChild(pElt);
+    pElt.innerHTML = "Le nounours n'existe plus, retournez à l'accueil";
+
+    let buttonReturn = document.createElement('a');
+    boiteANounous.appendChild(buttonReturn);
+    buttonReturn.innerHTML = "Retourner à l'accueil";
+    buttonReturn.setAttribute('href', 'index.html');
+    buttonReturn.classList.add('button'); 
+    
+    let divClassNounours = document.querySelectorAll('.nounours');
+    divClassNounours.style.display = 'none';
 })

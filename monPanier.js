@@ -21,6 +21,9 @@ if(monPanier == null && maCommande == null){
   buttonCommandeElt.innerHTML = 'Accéder à mon compte';
   buttonCommandeElt.classList.add('accesCommande');
 
+    /////////////
+    //EVENEMENT//
+    ////////////
   buttonCommandeElt.addEventListener('click', function(e){
     buttonCommandeElt.setAttribute('href', 'commandes.html');
   })
@@ -63,12 +66,13 @@ if(monPanier == null && maCommande == null){
     buttonElt.innerHTML = "Supprimer l'article";
     buttonElt.classList.add("buttonSuppr");
 
+    /////////////
+    //EVENEMENT//
+    ////////////
     /* Ajout de l'event sur le bouton supprimer */
     buttonElt.addEventListener('click', function(e) {
       e.stopPropagation;
       e.preventDefault();
-      console.log(JSON.stringify(monPanierObject[i]));
-      localStorage.removeItem('monPanier.0');
 
       /* Calcul du nombre d'élément dans le panier et le local storage */
       const index = monPanierObject.indexOf(monPanierObject[i]);
@@ -80,7 +84,6 @@ if(monPanier == null && maCommande == null){
       }
       /* On réactualise la page pour que l'article se retire de l'affichage html */
       document.location.reload();
-      console.log(monPanierObject); 
 
       /* On vide le localstorage */
       localStorage.clear();
@@ -90,7 +93,7 @@ if(monPanier == null && maCommande == null){
         let pElt = document.createElement('p');
         divElt.appendChild(pElt);
         pElt.innerHTML = 'Votre panier est vide';
-      /* sinon on réinjecte les items encore présent dans le localstorage */
+      /* sinon on réinjecte la variable 'monPanierObject' contenant les articles encore présent dans le localstorage */
     } else{
         localStorage.setItem('monPanier', JSON.stringify(monPanierObject));
       }
@@ -103,21 +106,16 @@ if(monPanier == null && maCommande == null){
   
   /* Calcul du prix total en créant un tableau vide dans une variable */
   let monArray = [];
-  console.log(monArray);
 
   /* Chaque prix d'item est ajouté dans le tableau "monArray" */
   for (let j=0; j < monPanierObject.length; j++) {
     monArray.push(monPanierObject[j][1]);
-    console.log(monArray);
   }
   
   /* Calcul la somme de tous les prix des items et les range dans la variable "sum" */
   const sum = monArray.reduce((accumulator, currentValue) => {  
     return accumulator + currentValue;
   });
-  
-  console.log(sum);
-
 
   /* FORM */
   let divFormElt = document.createElement('div');
@@ -163,13 +161,11 @@ if(monPanier == null && maCommande == null){
     const regex = /[0-9]/g;
     if (inputLastName.value == "" || regex.test(inputLastName.value)) { 
       
+      // Cette condition évite que le message d'erreur se répéte à chaque click sur le bouton
       if (errorMessageFirstName.textContent == true) {
         errorMessageFirstName.textContent=""; 
-        errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
-      } else {
-        errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
       }
-
+      errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
       inputFirstName.focus(); 
       return false; 
     } else {
@@ -260,7 +256,7 @@ if(monPanier == null && maCommande == null){
   elle vérifie que la cellule est complétée */
   function validateAddress() { 
     let inputAddress = document.getElementById('address');
-    const regex = /^([a-z]){1,2}$/;
+    const regex = /^([a-z]|[0-9]){1,2}$/;
     if (inputAddress.value == "" || regex.test(inputAddress.value)) { 
       
       if (errorMessageAddress.textContent == true) {
@@ -400,6 +396,9 @@ if(monPanier == null && maCommande == null){
   divFormElt.appendChild(resultElt);
   resultElt.innerHTML = sum;
 
+  /////////////
+  //EVENEMENT//
+  ////////////
   // Ajout d'un evénement sur le bouton "commander"
   buttonCommande.addEventListener('click', function(e) {
 
@@ -447,17 +446,6 @@ if(monPanier == null && maCommande == null){
         console.log(JSON.stringify(data));
         localStorage.setItem('maCommande', JSON.stringify(data));
 
-        let mesArticles = [];
-        for (let k=0; k < monPanierObject.length; k++) {
-
-          mesArticles.push(monPanierObject[k][4]);
-          mesArticles.push(monPanierObject[k][2]);
-          mesArticles.push(monPanierObject[k][1]);
-          mesArticles.push(monPanierObject[k][3]);
-
-          console.log(mesArticles);
-          localStorage.setItem('mesArticles', JSON.stringify(mesArticles));
-        }
         localStorage.removeItem('contact');
         localStorage.removeItem('monPanier');
         localStorage.removeItem('products');
