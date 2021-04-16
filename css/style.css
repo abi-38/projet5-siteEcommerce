@@ -55,7 +55,7 @@ main {
     background-color: #9F63D1;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .nounours {
         width: 90vw;
     }

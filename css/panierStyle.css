@@ -247,7 +247,7 @@ h3.h3 {
     align-items: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     div.divArticle {
         width: 90vw;
     }

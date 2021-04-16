@@ -62,7 +62,7 @@ header {
     border-bottom: 2px solid black;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     nav {
         display: block;
     }
