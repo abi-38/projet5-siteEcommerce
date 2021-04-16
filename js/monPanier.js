@@ -164,12 +164,10 @@ if(monPanier == null && maCommande == null){
       // Cette condition évite que le message d'erreur se répéte à chaque click sur le bouton
       if (errorMessageFirstName.textContent == true) {
         errorMessageFirstName.textContent=""; 
-        errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
-      } else {
-        errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
-        inputFirstName.focus(); 
-        return false; 
-      }
+      } 
+      errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
+      inputFirstName.focus(); 
+      return false; 
     } else {
       errorMessageFirstName.textContent=""; 
       return true;
@@ -214,11 +212,8 @@ if(monPanier == null && maCommande == null){
 
       if (errorMessageLastName.textContent == true) {
         errorMessageLastName.textContent=""; 
-        errorMessageLastName.textContent="Veuillez entrez un nom valide"; 
-      } else {
-        errorMessageLastName.textContent="Veuillez entrez un nom valide"; 
       }
-
+      errorMessageLastName.textContent="Veuillez entrez un nom valide";
       inputLastName.focus(); 
       return false; 
     } else {
@@ -263,11 +258,8 @@ if(monPanier == null && maCommande == null){
       
       if (errorMessageAddress.textContent == true) {
         errorMessageAddress.textContent=""; 
-        errorMessageAddress.textContent="Veuillez entrez une addresse valide"; 
-      } else {
-        errorMessageAddress.textContent="Veuillez entrez une addresse valide"; 
       }
-
+      errorMessageAddress.textContent="Veuillez entrez une addresse valide"; 
       inputAddress.focus(); 
       return false; 
     } else {
@@ -313,11 +305,8 @@ if(monPanier == null && maCommande == null){
       
       if (errorMessageCity.textContent == true) {
         errorMessageCity.textContent=""; 
-        errorMessageCity.textContent="Veuillez entrez un nom de ville valide"; 
-      } else {
-        errorMessageCity.textContent="Veuillez entrez un nom de ville valide"; 
-      }
-
+      } 
+      errorMessageCity.textContent="Veuillez entrez un nom de ville valide"; 
       inputCity.focus(); 
       return false; 
     } else {
@@ -363,11 +352,8 @@ if(monPanier == null && maCommande == null){
       
       if (errorMessageEmail.textContent == true) {
         errorMessageEmail.textContent=""; 
-        errorMessageEmail.textContent="Veuillez entrez une adresse mail valide"; 
-      } else {
-        errorMessageEmail.textContent="Veuillez entrez une adresse mail valide"; 
-      }
-
+      } 
+      errorMessageEmail.textContent="Veuillez entrez une adresse mail valide"; 
       inputEmail.focus(); 
       return false; 
     } else {

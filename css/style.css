@@ -3,57 +3,6 @@ body {
    margin: 0;
 }
 
-h1, h2, h3, p, a {
-    font-family: 'Finger Paint', cursive;
-}
-
-.imgHeader {
-    width: auto;
-    height: 50px;
-}
-
-.logo {
-    padding-left: 5px;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav > ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-}
-
-nav > ul > li {
-    padding-right: 10px;
-}
-
-nav > ul > li > a {
-    text-decoration: none;
-    font-family: 'Finger Paint', cursive;
-    color: black;
-}
-
-nav > ul > li > a > p {
-    margin-top: 0px;
-}
-
-footer > nav > ul > li > a > p {
-    padding-left: 20px;
-}
-
-nav > ul > li > a:hover {
-    color: #9F63D1;;
-}
-
-header {
-    border-bottom: 2px solid black;
-}
-
 main {
     text-align: center;
 }
@@ -64,6 +13,9 @@ main {
     justify-content: center;
     align-items: center;
     background-color: #9F63D1;
+    margin-top: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .nounours {
@@ -103,3 +55,12 @@ main {
     background-color: #9F63D1;
 }
 
+@media (max-width: 600px) {
+    .nounours {
+        width: 90vw;
+    }
+    .titrePrix {
+        width: 90vw;
+        justify-content: space-between;
+    }
+}

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="panierStyle.css">
+    <link rel="stylesheet" href="css/panierStyle.css">
+    <link rel="stylesheet" href="css/HearderFooter.css">
     <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
     
     <title>Mon panier</title>
@@ -21,14 +22,17 @@
         </nav>
     </header>
     <main>
-        <div class="divTitre">
-            <h1>Bienvenue dans mon panier</h1>
-            <h2>Passer commande en quelques clics !</h2>
+        <div class="ligne">
+            <a href="index.html"><img src="images/return-arrow.png" alt="flèche de retour"></a>
+            <div>
+                <h1>Mon panier</h1>
+                <h2>Passer commande en quelques clics !</h2>
+            </div>
         </div>
         <div id="monPanier"></div>
     </main>
     <footer>
-        <nav>
+        <nav class="footer">
             <a href="index.html"><img class="imgHeader logo" src="images/logo.png" alt="logo"></a>
             <ul>
                 <li><a href="index.html"><p>Accueil</p></a></li>
@@ -40,6 +44,6 @@
             </ul>
         </nav>
     </footer>
-    <script src="monPanier.js"></script>
+    <script src="js/monPanier.js"></script>
 </body>
 </html>
