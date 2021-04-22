@@ -153,27 +153,8 @@ if(monPanier == null && maCommande == null){
   let errorMessageFirstName = document.createElement('span');
   pFirstName.appendChild(errorMessageFirstName);
   errorMessageFirstName.classList.add('spanErrorMessage');
-
-  /* Fonction qui sera appelé au click du bouton "commander",
-  elle vérifie que la cellule est complétée */
-  function validateFirstName() { 
-    let inputFirstName = document.getElementById('firstName');
-    const regex = /[0-9]/g;
-    if (inputFirstName.value == "" || regex.test(inputFirstName.value)) { 
-      
-      // Cette condition évite que le message d'erreur se répéte à chaque click sur le bouton
-      if (errorMessageFirstName.textContent == true) {
-        errorMessageFirstName.textContent=""; 
-      } 
-      errorMessageFirstName.textContent="Veuillez entrez un prénom valide"; 
-      inputFirstName.focus(); 
-      return false; 
-    } else {
-      errorMessageFirstName.textContent=""; 
-      return true;
-    }
-  }
-  
+  errorMessageFirstName.setAttribute("id","errorMessageFirstName");
+    
   /* LASTNAME */
 
   // Création du paragraphe qui contient le label et l'input
@@ -202,25 +183,7 @@ if(monPanier == null && maCommande == null){
   let errorMessageLastName = document.createElement('span');
   pLastName.appendChild(errorMessageLastName);
   errorMessageLastName.classList.add('spanErrorMessage');
-
-  /* Fonction qui sera appelé au click du bouton "commander",
-  elle vérifie que la cellule est complétée */
-  function validateLastName() { 
-    let inputLastName = document.getElementById('lastName');
-    const regex = /[0-9]/g;
-    if (inputLastName.value == "" || regex.test(inputLastName.value)) { 
-
-      if (errorMessageLastName.textContent == true) {
-        errorMessageLastName.textContent=""; 
-      }
-      errorMessageLastName.textContent="Veuillez entrez un nom valide";
-      inputLastName.focus(); 
-      return false; 
-    } else {
-      errorMessageLastName.textContent=""; 
-      return true;
-    }
-  }
+  errorMessageLastName.setAttribute("id","errorMessageLastName");
 
   /* ADDRESS */
 
@@ -248,25 +211,7 @@ if(monPanier == null && maCommande == null){
   let errorMessageAddress = document.createElement('span');
   pAddress.appendChild(errorMessageAddress);
   errorMessageAddress.classList.add('spanErrorMessage');
-
-  /* Fonction qui sera appelé au click du bouton "commander",
-  elle vérifie que la cellule est complétée */
-  function validateAddress() { 
-    let inputAddress = document.getElementById('address');
-    const regex = /^([a-z]|[0-9]){1,2}$/;
-    if (inputAddress.value == "" || regex.test(inputAddress.value)) { 
-      
-      if (errorMessageAddress.textContent == true) {
-        errorMessageAddress.textContent=""; 
-      }
-      errorMessageAddress.textContent="Veuillez entrez une addresse valide"; 
-      inputAddress.focus(); 
-      return false; 
-    } else {
-      errorMessageAddress.textContent=""; 
-      return true;
-    }
-  }
+  errorMessageAddress.setAttribute("id","errorMessageAddress");
   
   /* VILLE */
 
@@ -295,25 +240,7 @@ if(monPanier == null && maCommande == null){
   let errorMessageCity = document.createElement('span');
   pVille.appendChild(errorMessageCity);
   errorMessageCity.classList.add('spanErrorMessage');
-
-  /* Fonction qui sera appelée au click du bouton "commander",
-  elle vérifie que la cellule est complétée */
-  function validateCity() { 
-    let inputCity = document.getElementById('city');
-    const regex = /[0-9]/g;
-    if (inputCity.value == "" || regex.test(inputCity.value)) { 
-      
-      if (errorMessageCity.textContent == true) {
-        errorMessageCity.textContent=""; 
-      } 
-      errorMessageCity.textContent="Veuillez entrez un nom de ville valide"; 
-      inputCity.focus(); 
-      return false; 
-    } else {
-      errorMessageCity.textContent=""; 
-      return true;
-    }
-  }
+  errorMessageCity.setAttribute("id","errorMessageCity");
 
   /* EMAIL */
 
@@ -342,25 +269,7 @@ if(monPanier == null && maCommande == null){
   let errorMessageEmail = document.createElement('span');
   pEmail.appendChild(errorMessageEmail);
   errorMessageEmail.classList.add('spanErrorMessage');
-
-  /* Fonction qui sera appelée au click du bouton "commander",
-  elle vérifie que la cellule est complétée */
-  function validateEmail() { 
-    let inputEmail = document.getElementById('email');
-    const regex = /^([a-zA-Z0-9_-]+)|([a-zA-Z0-9_-]+\.[a-zA-Z0-9_-])+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,3}$/;
-    if (inputEmail.value == "" || regex.exec(inputEmail.value)==null) { 
-      
-      if (errorMessageEmail.textContent == true) {
-        errorMessageEmail.textContent=""; 
-      } 
-      errorMessageEmail.textContent="Veuillez entrez une adresse mail valide"; 
-      inputEmail.focus(); 
-      return false; 
-    } else {
-      errorMessageEmail.textContent=""; 
-      return true;
-    }
-  }
+  errorMessageEmail.setAttribute("id","errorMessageEmail");
 
   // Affichage de l'indication "Les champs indiqués par une * sont obligatoires"
   let indicationElt = document.createElement('p');
@@ -383,18 +292,38 @@ if(monPanier == null && maCommande == null){
   divFormElt.appendChild(resultElt);
   resultElt.innerHTML = sum;
 
+
+  function validate(paraInput, paraRegex, paraMessage, idErrorMessage) { 
+    let input = document.getElementById(paraInput);
+    let errorMessage = document.getElementById(idErrorMessage);
+
+    if (input.value == "" || paraRegex.exec(input.value)==null) { 
+      
+      if (errorMessage.textContent == true) {
+        errorMessage.textContent=""; 
+      } 
+      errorMessage.textContent="Veuillez entrez " + paraMessage + " valide"; 
+      input.focus(); 
+      return false; 
+    } else {
+      errorMessage.textContent=""; 
+      return true;
+    }
+  }
+
   /////////////
   //EVENEMENT//
   ////////////
   // Ajout d'un evénement sur le bouton "commander"
   buttonCommande.addEventListener('click', function(e) {
 
-    // Récupération des variables qui vérifie que les champs sont bien complétés
-    let validFirstName = validateFirstName();
-    let validLastName = validateLastName();
-    let validAddress = validateAddress();
-    let validCity = validateCity();
-    let validEmail = validateEmail();
+    // Récupération de la fonction validate qui vérifie que les champs sont bien complétés    
+    let validFirstName = validate('firstName', /^(.*[a-zA-Z]){3}$/, 'un prénom', 'errorMessageFirstName');
+    let validLastName = validate('lastName', /^(.*[a-zA-Z]){3}$/, 'un nom', 'errorMessageLastName');
+    let validAddress = validate('address', /^[a-zA-Z0-9 ]{3}|[a-zA-Z ]{3}$/, 'une adresse', 'errorMessageAddress');
+    let validCity = validate('city', /^(.*[a-zA-Z]){3}$/, 'un nom de ville', 'errorMessageCity');
+    let validEmail = validate('email', /^[0-9a-zA-Z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,3}$/, 'une adresse mail', 'errorMessageEmail');
+    
 
     // Condition qui vérifie que ces variables sont correctes
     if (validFirstName && validLastName && validAddress && validCity && validEmail) {

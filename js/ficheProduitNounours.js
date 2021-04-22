@@ -54,9 +54,10 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
     //EVENEMENT//
     ////////////
     buttonNounours.addEventListener('click', function(e) {
+
         /* je regarde si le panier existe déjà */        
-        /* s'il existe alors je le traduit en tableau -> json.parse + j'ajoute au tableau le nounours et le remettre en storage -> json.stringify */
         let monPanier = localStorage.getItem('monPanier');
+        /* s'il existe alors je le traduit en tableau -> json.parse + j'ajoute au tableau le nounours et le remettre en storage -> json.stringify */
         if(monPanier == null){
             let monArticle = [];
             monArticle.push([nounours, data.price, data.name, selectNounours.options[selectNounours.selectedIndex].value, data.imageUrl]);
@@ -69,32 +70,20 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
         }
     })
 })
-.catch(error => alert("Le nounours n'existe plus, retournez à l'accueil")/* {
-    
-    A VOIR EN MENTORA !!!!
-    
-    console.log(error);
+.catch(error => {
 
-    const boiteANounous = document.getElementById("desciptionNounours");
+    let divNounours = document.getElementsByClassName('nounours');
+    divNounours[0].textContent = '';
 
     let pElt = document.createElement('p');
-    boiteANounous.appendChild(pElt);
+    divNounours[0].appendChild(pElt);
     pElt.innerHTML = "Le nounours n'existe plus, retournez à l'accueil";
 
     let buttonReturn = document.createElement('a');
-    boiteANounous.appendChild(buttonReturn);
+    divNounours[0].appendChild(buttonReturn);
     buttonReturn.innerHTML = "Retourner à l'accueil";
-
 
     buttonReturn.setAttribute('href', 'index.html');
     buttonReturn.classList.add('button'); 
 
-    /*let divNounours = document.getElementsByClassName('nounours');
-    console.log(divNounours);
-    boiteANounous.removeChild(divNounours);
-    let divNounours = document.getElementsByClassName('nounours');
-    divNounours.classList.replace("nounours", "displayNone");
-
-
-}*/
-)
+})
