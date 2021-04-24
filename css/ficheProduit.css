@@ -91,6 +91,12 @@ div.nounours > img {
     color: white;
 }
 
+.spanSuccessMessage {
+    font-family: 'Finger Paint', cursive;
+    font-size: 16px;
+    padding-bottom: 20px;
+}
+
 @media (max-width: 800px) {
     div.nounours {
         width: 87vw;

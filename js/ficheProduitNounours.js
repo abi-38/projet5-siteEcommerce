@@ -28,7 +28,7 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
 
     let priceNounours = document.createElement('p');
     divNounours.appendChild(priceNounours);
-    priceNounours.innerHTML = data.price + ' €';
+    priceNounours.innerHTML = data.price /100 + ' €';
 
     let labelNounours = document.createElement('label');
     divNounours.appendChild(labelNounours);
@@ -62,11 +62,22 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
             let monArticle = [];
             monArticle.push([nounours, data.price, data.name, selectNounours.options[selectNounours.selectedIndex].value, data.imageUrl]);
             localStorage.setItem('monPanier', JSON.stringify(monArticle));
+
+            let spanSuccessMessage = document.createElement('span');
+            divNounours.appendChild(spanSuccessMessage);
+            spanSuccessMessage.classList.add('spanErrorMessage');
+            spanSuccessMessage.textContent = 'Votre article a bien été ajouté au panier !';
+
         /* sinon je crée + ajout nounours + le mettre en storage -> json.stringify */
         } else {
             let monAjout = JSON.parse(monPanier);
             monAjout.push([nounours, data.price, data.name, selectNounours.options[selectNounours.selectedIndex].value, data.imageUrl]);
             localStorage.setItem('monPanier', JSON.stringify(monAjout));
+
+            let spanSuccessMessage = document.createElement('span');
+            divNounours.appendChild(spanSuccessMessage);
+            spanSuccessMessage.classList.add('spanSuccessMessage');
+            spanSuccessMessage.textContent = 'Votre article a bien été ajouté au panier !';
         }
     })
 })

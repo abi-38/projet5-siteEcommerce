@@ -23,7 +23,7 @@ fetch("http://localhost:3000/api/teddies")
 
         let priceNounours = document.createElement('p');
         divTitrePrix.appendChild(priceNounours);
-        priceNounours.innerHTML = data[i].price + ' €';
+        priceNounours.innerHTML = data[i].price /100 + ' €';
 
         let aNounours = document.createElement('a');
         divNounours.appendChild(aNounours);

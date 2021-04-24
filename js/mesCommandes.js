@@ -95,7 +95,7 @@ if(maCommande == null){
         /* Affichage du prix de l'article */
         let prixElt = document.createElement('p');
         divArticleElt.appendChild(prixElt);
-        prixElt.innerHTML = maCommandeElt.products[i].price + ' €';
+        prixElt.innerHTML = maCommandeElt.products[i].price /100 + ' €';
     
         /* Affichage de la couleur de l'article */
         let p2Elt = document.createElement('p');
