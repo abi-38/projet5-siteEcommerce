@@ -318,8 +318,8 @@ if(monPanier == null && maCommande == null){
   buttonCommande.addEventListener('click', function(e) {
 
     // Récupération de la fonction validate qui vérifie que les champs sont bien complétés    
-    let validFirstName = validate('firstName', /^(.*[a-zA-Z]){3}$/, 'un prénom', 'errorMessageLastName');
-    let validLastName = validate('lastName', /^(.*[a-zA-Z]){3}$/, 'un nom', 'errorMessageFristName');
+    let validFirstName = validate('firstName', /^(.*[a-zA-Z]){3}$/, 'un nom', 'errorMessageFirstName');
+    let validLastName = validate('lastName', /^(.*[a-zA-Z]){3}$/, 'un prénom', 'errorMessageLastName');
     let validAddress = validate('address', /^[a-zA-Z0-9 ]{3}|[a-zA-Z ]{3}$/, 'une adresse', 'errorMessageAddress');
     let validCity = validate('city', /^(.*[a-zA-Z]){3}$/, 'un nom de ville', 'errorMessageCity');
     let validEmail = validate('email', /^[0-9a-zA-Z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,3}$/, 'une adresse mail', 'errorMessageEmail');
