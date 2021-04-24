@@ -65,7 +65,6 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
 
             let spanSuccessMessage = document.createElement('span');
             divNounours.appendChild(spanSuccessMessage);
-            spanSuccessMessage.classList.add('spanSuccessMessage');
             spanSuccessMessage.textContent = 'Votre article a bien été ajouté au panier !';
 
         /* sinon je crée + ajout nounours + le mettre en storage -> json.stringify */
@@ -76,7 +75,6 @@ fetch("http://localhost:3000/api/teddies/" + nounours) /*envoie de la requête*/
 
             let spanSuccessMessage = document.createElement('span');
             divNounours.appendChild(spanSuccessMessage);
-            spanSuccessMessage.classList.add('spanSuccessMessage');
             spanSuccessMessage.textContent = 'Votre article a bien été ajouté au panier !';
         }
     })
